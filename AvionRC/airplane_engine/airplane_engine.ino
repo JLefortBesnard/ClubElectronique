@@ -32,9 +32,17 @@ radiomsg msg;
 
 void setup()
 {
+  delay(3000);
   Serial.begin(115200); // Initialiser la communication série pour le débogage
-  servoDir.attach(2);   // attaches the servo on pin 2 to the servo direction of airplane
-  servoAlt.attach(3);   // attaches the servo on pin 2 to the servo direction of airplane
+  servoDir.attach(2);   // attaches the servo on pin 2 to the servo direction of airplane // yaw
+  servoAlt.attach(3);   // attaches the servo on pin 2 to the servo direction of airplane // pitch
+  // roll pour roulie (tonneaux autour de l'axe central)
+
+  // reset the servo position
+  servoAlt.write(90);
+  servoDir.write(90);
+  delay(150);
+
    // Configurer la radio
   if (!radio.begin())
   {
@@ -75,14 +83,12 @@ void loop()
     radio.read(&msg, bytes);                 // Lire le message radio
     // set the servo position
     servoAlt.write(msg.servoA);
-    delay(150);
     servoDir.write(msg.servoB);
-    delay(150);
   }
   else
   {
     Serial.println("Radio not available");
   }
-  delay(50);
+  delay(150);
 }
 

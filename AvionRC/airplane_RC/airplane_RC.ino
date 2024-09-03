@@ -85,6 +85,6 @@ void loop()
   {
     Serial.println(F("msg not send"));
   }
-  delay(200);
+  delay(16);
 }
 
