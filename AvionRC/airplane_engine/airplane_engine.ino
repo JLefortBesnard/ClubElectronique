@@ -12,6 +12,8 @@
 Servo servoDir;
 Servo servoAlt;
 
+int old_A, old_B;
+
 // **Objet pour la communication radio**
 RF24 radio(CE_PIN, CSN_PIN); // instantiate an object for the nRF24L01 transceiver
 
@@ -41,6 +43,8 @@ void setup()
   // reset the servo position
   servoAlt.write(90);
   servoDir.write(90);
+  old_A = 90;
+  old_B = 90;
   delay(150);
 
    // Configurer la radio
@@ -84,11 +88,17 @@ void loop()
     // set the servo position
     servoAlt.write(msg.servoA);
     servoDir.write(msg.servoB);
+    if (msg.servoA != old_A || msg.servoB != old_B){
+      delay(150);
+      old_A = msg.servoA;
+      old_B = msg.servoB;
+    }
+
   }
   else
   {
     Serial.println("Radio not available");
   }
-  delay(150);
+  delay(16);
 }
 
