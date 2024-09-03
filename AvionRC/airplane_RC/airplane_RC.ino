@@ -61,10 +61,10 @@ void loop()
   // Altitude haut A
   if (boutons & 0b00000001)
   {
-      msg.servoA = 60;
+      msg.servoA = 0;
   } else if (boutons & 0b00000100)  // Altitude haut C
     {
-        msg.servoA = 120;
+        msg.servoA = 180;
     } else 
       {
         msg.servoA = 90;  // retour normal
@@ -72,10 +72,10 @@ void loop()
 
   if (boutons & 0b00000010)   // Direction droite B
   {
-      msg.servoB = 60;
+      msg.servoB = 00;
   } else if (boutons & 0b00001000) // Direction gauche D
     {
-        msg.servoB = 120;
+        msg.servoB = 180;
     } else 
       {
         msg.servoB = 90;
